@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./SignUpForm.module.css"
-import myImg from "../../public/images/Union.png"
+import myImg from "../images/Union.png"
+import { Link } from "react-router-dom";
 function SignupForm() {
   return (
     <div className={styles.container}>
@@ -15,7 +16,7 @@ function SignupForm() {
         <input type="text" placeholder="تکرار رمز عبور" />
         <button>ثبت نام</button>
         <span>
-          <a href="">حساب کاربری دارید؟</a>
+          <Link to="login">حساب کاربری دارید؟</Link>
         </span>
       </form>
     </div>

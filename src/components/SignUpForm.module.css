@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "Vazirmatn";
+  src: url(../assets/fonts/Vazirmatn-Medium.ttf);
+}
 .container h1 {
   text-align: center;
 }
@@ -5,7 +9,7 @@
 .form {
   margin: auto;
   margin-top: 50px;
-  width: 460px;
+  width: 470px;
   height: 596px;
   border-radius: 40px;
   display: flex;
@@ -25,7 +29,6 @@
   font-weight: 500;
   line-height: 37.5px;
   color: #282828;
-
 }
 .form img {
   width: 80px;
