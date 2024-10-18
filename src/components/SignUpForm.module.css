@@ -21,7 +21,7 @@
 .form div {
   display: flex;
   flex-direction: column;
-  margin: 2rem;
+  margin: 1.2rem;
 }
 .form div h1 {
   font-family: Vazirmatn;
@@ -38,7 +38,7 @@
 
 .form input {
   width: Fixed (400px) px;
-  height: Fixed (53px) px;
+  height: Fixed (50px) px;
   background: #f2f2f2;
   margin: 10px;
   padding: 22px 15px 22px 15px;
@@ -73,7 +73,7 @@
 }
 .form a {
   width: 127px;
-  /* height: 25px; */
+  height: 25px;
   opacity: 0px;
   font-family: Vazirmatn;
   font-size: 16px;
@@ -81,12 +81,13 @@
   line-height: 25px;
   text-align: right;
   color: #3a8bed;
-  margin: 10px;
+  margin:  15px;
   text-decoration: none;
 }
 span{
+  height: 5px;
   font-family: Vazirmatn;
   font-size: 12px;
-  color: red;
-  margin: 0 15px; 
+  color: red; 
+  margin:  0px 10px 11px 0px;
 }
