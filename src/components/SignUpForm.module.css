@@ -73,7 +73,7 @@
 }
 .form a {
   width: 127px;
-  height: 25px;
+  /* height: 25px; */
   opacity: 0px;
   font-family: Vazirmatn;
   font-size: 16px;
@@ -83,4 +83,10 @@
   color: #3a8bed;
   margin: 10px;
   text-decoration: none;
+}
+span{
+  font-family: Vazirmatn;
+  font-size: 12px;
+  color: red;
+  margin: 0 15px; 
 }
