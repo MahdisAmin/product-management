@@ -3,8 +3,13 @@
   line-height: 1.5;
   font-weight: 400;
 }
+@font-face {
+  font-family: "Vazirmatn";
+  src: url(../assets/fonts/Vazirmatn-Medium.ttf);
+}
 body {
   background: #f7f8f8;
+  font-family: Vazirmatn;
 }
 * {
   margin: 0;
