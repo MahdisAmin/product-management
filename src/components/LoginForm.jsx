@@ -1,15 +1,37 @@
 import React from "react";
 import styles from "./SignUpForm.module.css";
 import myImg from "../images/Union.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useLogin } from "../services/mutations";
+import { setCookie } from "../utils/cookie";
 function LoginForm() {
+  const navigate = useNavigate();
+  const { mutate } = useLogin();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmin = (data) => console.log(data);
+  const onSubmin = (data) => {
+    console.log(data);
+    mutate(
+      {
+        username: data.user,
+        password: data.pass,
+      },
+      {
+        onSuccess: (data) => {
+          console.log(data.data);
+          setCookie("token", data.data?.token);
+          navigate("/");
+        },
+        onError: (error) => console.log(error.response.data.message),
+      }
+    );
+  };
+
   return (
     <div>
       <div className={styles.container}>
@@ -24,12 +46,12 @@ function LoginForm() {
             <h1>فرم ورود</h1>
           </div>
 
-          <label htmlFor="name"></label>
+          <label htmlFor="user"></label>
           <input
             type="text"
             placeholder="نام کاربری"
-            id="name"
-            {...register("name", { required: true })}
+            id="user"
+            {...register("user", { required: true })}
           />
           {errors.name && <span>این فیلد اجباریست</span>}
 

@@ -14,9 +14,9 @@ function App() {
         <ToastContainer />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<SignUpPage />} />
+            <Route path="/register" element={<SignUpPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/" element={<DashboardPage />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
