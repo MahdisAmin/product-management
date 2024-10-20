@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useRegister } from "../services/mutations";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function SignupForm() {
   console.log("rendering registerPage");
   const navigate = useNavigate();
@@ -38,11 +41,15 @@ function SignupForm() {
       },
       {
         onSuccess: (data) => {
-          console.log(data.data.message);
+          console.log("succsee", data);
+
           navigate("login");
+          toast.success("ثبت نام با موفقیت انجام شد", { autoClose: 3000 });
         },
         onError: (error) => {
-          console.log(error.respose?.data?.message);
+          console.log("error", error);
+
+          toast.error("مشکلی پیش آمد", { autoClose: 3000 });
         },
       }
     );
