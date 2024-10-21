@@ -20,7 +20,7 @@ function Router() {
         />
         <Route path="/register" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="*" element={<PageNotFound/>} />
+        <Route path="/*" element={<PageNotFound/>} />
       </Routes>
     </BrowserRouter>
   );

@@ -53,7 +53,7 @@ function LoginForm() {
             id="user"
             {...register("user", { required: true })}
           />
-          {errors.name && <span>این فیلد اجباریست</span>}
+          {errors.user && <span>این فیلد اجباریست</span>}
 
           <label htmlFor="pass"></label>
           <input
@@ -67,7 +67,7 @@ function LoginForm() {
 
           <button>ورود </button>
           {/* <span> */}
-          <Link to="/">ایجاد حساب کاربری!</Link>
+          <Link to="/register">ایجاد حساب کاربری!</Link>
           {/* </span> */}
         </form>
       </div>

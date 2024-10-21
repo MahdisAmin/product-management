@@ -31,9 +31,7 @@ function SignupForm() {
       return;
     }
     setPasswordError("");
-
     console.log(data.user, data.pass);
-
     mutate(
       {
         username: data.user,
@@ -43,7 +41,7 @@ function SignupForm() {
         onSuccess: (data) => {
           console.log("succsee", data);
 
-          navigate("login");
+          navigate("/login");
           toast.success("ثبت نام با موفقیت انجام شد", { autoClose: 3000 });
         },
         onError: (error) => {
@@ -96,7 +94,7 @@ function SignupForm() {
 
         <button>ثبت نام</button>
         <span>
-          <Link to="login">حساب کاربری دارید؟</Link>
+          <Link to="/login">حساب کاربری دارید؟</Link>
         </span>
       </form>
     </div>
