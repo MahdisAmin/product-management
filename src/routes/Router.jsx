@@ -18,9 +18,9 @@ function Router() {
           path="/"
           element={token ? <DashboardPage /> : <Navigate to="login" />}
         />
-        <Route path="/register" element={<SignUpPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/*" element={<PageNotFound/>} />
+        <Route path="register" element={<SignUpPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );

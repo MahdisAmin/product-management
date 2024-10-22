@@ -1,22 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./SignUpForm.module.css";
 import myImg from "../images/Union.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useLogin } from "../services/mutations";
-import { setCookie } from "../utils/cookie";
+import { getCookie, setCookie } from "../utils/cookie";
 function LoginForm() {
   const navigate = useNavigate();
-  const { mutate } = useLogin();
+  const { mutateAsync } = useLogin();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmin = (data) => {
-    console.log(data);
-    mutate(
+
+  const onSubmin = async (data) => {
+  
+   await mutateAsync(
       {
         username: data.user,
         password: data.pass,
@@ -25,7 +26,15 @@ function LoginForm() {
         onSuccess: (data) => {
           console.log(data.data);
           setCookie("token", data.data?.token);
-          navigate("/");
+          
+          const token = getCookie("token");
+          if (token) {
+            navigate("/");
+            window.location.reload()
+            } else {
+              console.log(" no token");
+            }
+       
         },
         onError: (error) => console.log(error.response.data.message),
       }
