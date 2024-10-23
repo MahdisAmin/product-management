@@ -14,4 +14,8 @@ const useLogin = () => {
   return useMutation({ mutationFn });
 };
 
-export { useRegister, useLogin };
+const getProducts = async () => {
+  const response = await api.get("/products");
+  return response.data
+};
+export { useRegister, useLogin  , getProducts};
