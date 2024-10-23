@@ -23,7 +23,7 @@ function DashboardPage() {
   const logOutHandler = () => {
     deleteCookie("token");
     console.log("After delete:", getCookie("token"));
-    navigate("/login"); // هدایت به صفحه لاگین
+    navigate("/login"); 
   };
 
   return (

@@ -20,6 +20,12 @@
   color: #282828;
   text-align: right;
 }
+.rotat{
+display: flex;
+align-items: center;
+justify-content: center;
+height: 100%;
+}
 th{
     padding-right: 50px;
 }

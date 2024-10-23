@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 
 import "./ProductTable.css";
+import { RotatingLines } from "react-loader-spinner";
 
 function ProductsTable() {
   const { data, error, isLoading } = useQuery({
@@ -18,8 +19,12 @@ function ProductsTable() {
   const deleteHandler = (id) => {
     console.log(id);
   };
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>error {error.message}</p>;
+  if (isLoading) return (
+    <div className="rotat">
+      <RotatingLines strokeColor="#55a3f0"  />
+    </div>
+  );
+  if (error) return <div className="rotat">error {error.message}</div>;
   const products = data?.data || [];
   return (
     <table>
