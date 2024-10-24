@@ -17,15 +17,19 @@
 .search {
   display: flex;
   align-items: center;
+  
 }
 .inputHolder input {
   border: 0;
   height: 35px;
-  font-size: 15px;
+  font-size: 20px;
   font-family: inherit;
   margin-right: 5px;
   outline: none;
   width: 50%;
+  background-color: transparent;
+  margin-top: 10px;
+
 }
 .userHolder {
   display: flex;
@@ -43,7 +47,7 @@
 .userHolder div{
     margin-left: 10px;
 }
-span, p{
+p{
     color: black;
     font-size: 16px;
 }

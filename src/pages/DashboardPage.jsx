@@ -6,19 +6,23 @@ import SearchDashboard from "../components/SearchDashboard";
 import { useNavigate } from "react-router-dom";
 import { deleteCookie, getCookie } from "../utils/cookie";
 import ProductsTable from "../components/ProductsTable";
+import AddModal from "../components/AddModal";
 
 function DashboardPage() {
-  const [token, setToken] = useState(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = getCookie("token");
-    if (!token) {
-      navigate("/login");
-    } else {
-      setToken(token);
-    }
-  }, [navigate]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [products, setProducts] = useState([])
+  
+  const openModel = () => {
+   setIsModalOpen(true)
+  }
+  const closeModale = () => {
+    setIsModalOpen(false)
+  }
+   
+  const addProductsHandler = (newProducts) => {
+    setProducts([...products , newProducts])
+  }
 
   const logOutHandler = () => {
     deleteCookie("token");
@@ -35,12 +39,16 @@ function DashboardPage() {
           <p>مدیرت کالا</p>
         </div>
         <div>
-          <button>افزودن محصول</button>
+          <button onClick={openModel}>افزودن محصول</button>
         </div>
       </div>
       <div className="table-container">
         <ProductsTable />
       </div>
+      <AddModal isOpen={isModalOpen}
+        onClose={closeModale}
+        onCreat={addProductsHandler}
+      />
     </>
   );
 }

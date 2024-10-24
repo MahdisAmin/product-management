@@ -9,7 +9,7 @@ function SearchDashboard() {
     <div className="container">
       <div className="inputHolder">
         <div className="search">
-          <CiSearch style={{ fontSize: "30px", lineHeight: "25px" }} />
+          <CiSearch style={{ fontSize: "30px", height: "40px" }} />
           <input type="text" placeholder="جستجو کالا" />
         </div>
         <div className="userHolder">
@@ -18,7 +18,7 @@ function SearchDashboard() {
           </div>
           <div>
             <p>نام کاربری</p>
-            <span>مدیر</span>
+            <p>مدیر</p>
           </div>
         </div>
       </div>
