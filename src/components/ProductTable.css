@@ -1,6 +1,6 @@
 .table-container {
   width: 1140px;
-  height: 737px;
+ min-height: 737px;
   border-radius: 30px;
   border: 1px solid #E4E4E4;
   margin: auto;

@@ -39,7 +39,7 @@ function ProductsTable() {
         </tr>
       </thead>
       <tbody>
-        {products.map((product) => (
+        {products?.map((product) => (
           <tr key={product.id}>
             <td>{product.name}</td>
             <td>{product.quantity}</td>

@@ -1,6 +1,7 @@
 import React from "react";
 import "./AddModal.css";
 import { useForm } from "react-hook-form";
+import {addProductsMutation } from "../services/mutations";
 
 function AddModal({ isOpen, onClose, onCreat }) {
   const {
@@ -8,12 +9,19 @@ function AddModal({ isOpen, onClose, onCreat }) {
     handleSubmit,
     formState: { errors },
   } = useForm();
-    const onSubmit = (data) => {
-        onCreat(data)
-        onClose()
-    }
-    
-    if(!isOpen) return
+
+  const addProducts = addProductsMutation();
+  const onSubmit = (data) => {
+    addProducts.mutate({
+      name: data.name,
+      price: data.price,
+      quantity: data.quantity,
+    });
+    onCreat(data);
+    onClose();
+  };
+
+  if (!isOpen) return;
   return (
     <div className="modal">
       <div>

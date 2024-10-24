@@ -21,7 +21,8 @@ function DashboardPage() {
   }
    
   const addProductsHandler = (newProducts) => {
-    setProducts([...products , newProducts])
+    console.log(newProducts);
+    
   }
 
   const logOutHandler = () => {
