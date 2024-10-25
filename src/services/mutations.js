@@ -14,7 +14,6 @@ const useLogin = () => {
   return useMutation({ mutationFn });
 };
 
-
 const addProductsMutation = () => {
   const queryClient = useQueryClient();
   const mutationFn = (newProduct) => api.post("/products", newProduct);
@@ -30,8 +29,26 @@ const addProductsMutation = () => {
 
 const getProducts = async () => {
   const response = await api.get("/products");
-  return response.data
+  return response.data;
 };
 
+const deleteProductMutation = () => {
+  const queryClient = useQueryClient();
+  const mutationFn = (productId) => api.delete(`/products/${productId}`);
+  return useMutation(
+    { mutationFn },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("products");
+      },
+    }
+  );
+};
 
-export { useRegister, useLogin  , getProducts , addProductsMutation};
+export {
+  useRegister,
+  useLogin,
+  getProducts,
+  addProductsMutation,
+  deleteProductMutation,
+};
