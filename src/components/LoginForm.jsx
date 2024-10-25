@@ -1,10 +1,13 @@
-import React, { useState } from "react";
-import styles from "./SignUpForm.module.css";
+import React from "react";
+
+import styles from "../styles/SignUpForm.module.css";
 import myImg from "../images/Union.png";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useLogin } from "../services/mutations";
 import { getCookie, setCookie } from "../utils/cookie";
+
 function LoginForm() {
   const navigate = useNavigate();
   const { mutateAsync } = useLogin();

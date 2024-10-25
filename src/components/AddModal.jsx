@@ -1,7 +1,8 @@
 import React from "react";
-import "./AddModal.css";
+import "../styles/AddModal.css";
+
 import { useForm } from "react-hook-form";
-import {addProductsMutation } from "../services/mutations";
+import { addProductsMutation } from "../services/mutations";
 
 function AddModal({ isOpen, onClose, onCreat }) {
   const {

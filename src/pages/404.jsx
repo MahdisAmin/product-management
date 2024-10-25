@@ -2,8 +2,8 @@ import React from "react";
 import myPhoto from "../images/404.png";
 import { Link } from "react-router-dom";
 
-import "./404.css";
-import { MdArrowLeft } from "react-icons/md";
+import "../styles/404.css";
+
 import { FaArrowLeft } from "react-icons/fa";
 function PageNotFound() {
   return (

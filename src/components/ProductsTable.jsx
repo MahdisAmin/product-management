@@ -1,7 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { deleteProductMutation, getProducts } from "../services/mutations";
-import "./ProductTable.css";
+
+import "../styles/ProductTable.css";
+
 import { RotatingLines } from "react-loader-spinner";
 import Table from "./Table";
 import DeleteModal from "./DeleteModal";

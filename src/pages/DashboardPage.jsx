@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import "./Dashboard.css";
+import "../styles/Dashboard.css";
 
 import SearchDashboard from "../components/SearchDashboard";
 import { useNavigate } from "react-router-dom";

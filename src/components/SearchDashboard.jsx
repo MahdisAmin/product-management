@@ -1,5 +1,5 @@
 import React from "react";
-import "./Search.css";
+import "../styles/Search.css";
 
 import myImg from "../images/user.png";
 import { CiSearch } from "react-icons/ci";

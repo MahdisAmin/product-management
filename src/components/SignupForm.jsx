@@ -1,5 +1,6 @@
-import styles from "./SignUpForm.module.css";
+import styles from "../styles/SignUpForm.module.css";
 import myImg from "../images/Union.png";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
