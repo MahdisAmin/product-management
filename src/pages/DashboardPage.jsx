@@ -11,24 +11,22 @@ import AddModal from "../components/AddModal";
 function DashboardPage() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [products, setProducts] = useState([])
-  
+
   const openModel = () => {
-   setIsModalOpen(true)
-  }
+    setIsModalOpen(true);
+  };
   const closeModale = () => {
-    setIsModalOpen(false)
-  }
-   
+    setIsModalOpen(false);
+  };
+
   const addProductsHandler = (newProducts) => {
     console.log(newProducts);
-    
-  }
+  };
 
   const logOutHandler = () => {
     deleteCookie("token");
     console.log("After delete:", getCookie("token"));
-    navigate("/login"); 
+    navigate("/login");
   };
 
   return (
@@ -46,7 +44,8 @@ function DashboardPage() {
       <div className="table-container">
         <ProductsTable />
       </div>
-      <AddModal isOpen={isModalOpen}
+      <AddModal
+        isOpen={isModalOpen}
         onClose={closeModale}
         onCreat={addProductsHandler}
       />
