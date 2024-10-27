@@ -24,7 +24,7 @@ function Table({ products, openEditModal, openDeleteModal }) {
             <td>{product.id.split("-")}</td>
             <td></td>
             <td>
-              <button onClick={() => openEditModal(product.id)}>
+              <button onClick={() => openEditModal(product)}>
                 <FaRegEdit style={{ color: "green", cursor: "pointer" }} />
               </button>
               <button onClick={() => openDeleteModal(product.id)}>

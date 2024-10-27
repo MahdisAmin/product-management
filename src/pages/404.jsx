@@ -12,7 +12,7 @@ function PageNotFound() {
    navigate("/login")
   };
   return (
-    <div className="container">
+    <div className="container404">
       <img src={myPhoto} alt="Not Found" />
       <button className="button" onClick={backHandler}>
         back

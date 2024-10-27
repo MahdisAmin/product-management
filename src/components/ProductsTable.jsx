@@ -1,9 +1,11 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { deleteProductMutation, getProducts } from "../services/mutations";
-
+import {
+  deleteProductMutation,
+  editProductMutation,
+  getProducts,
+} from "../services/mutations";
 import "../styles/ProductTable.css";
-
 import { RotatingLines } from "react-loader-spinner";
 import Table from "./Table";
 import DeleteModal from "./DeleteModal";
@@ -17,36 +19,47 @@ function ProductsTable() {
   const queryClient = useQueryClient();
 
   const deleteProduct = deleteProductMutation();
+  const editProduct = editProductMutation();
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [selectedProductId, setSelectedProductId] = useState(null);
-
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const openDeleteModal = (productId) => {
-    setSelectedProductId(productId);
+    setSelectedProduct(productId);
     setIsDeleteModalOpen(true);
   };
 
-  const openEditModal = (productId) => {
-    setSelectedProductId(productId);
-    setIsEditModalOpen(true);
+  const openEditModal = (product) => {
+    setSelectedProduct(product); 
+    setIsEditModalOpen(true)
   };
 
   const closeDeleteModal = () => {
     setIsDeleteModalOpen(false);
-    setSelectedProductId(null);
+    setSelectedProduct(null);
   };
 
   const closeEditModal = () => {
     setIsEditModalOpen(false);
-    setSelectedProductId(null);
+    setSelectedProduct(null);
   };
 
-  const editHandler = (id) => {};
+  const editHandler = (updateProduct) => {
+    editProduct.mutate(updateProduct, {
+      onSuccess: () => {
+        queryClient.invalidateQueries("products");
+        closeEditModal();
+      },
+      onError: (error) => {
+        console.error("خطا در به‌روزرسانی محصول", error);
+      },
+    });
+  };
+
   const deleteHandler = () => {
-    if (selectedProductId) {
-      deleteProduct.mutate(selectedProductId, {
+    if (selectedProduct) {
+      deleteProduct.mutate(selectedProduct, {
         onSuccess: () => {
           queryClient.invalidateQueries("products");
           closeDeleteModal();
@@ -72,12 +85,19 @@ function ProductsTable() {
         openEditModal={openEditModal}
         openDeleteModal={openDeleteModal}
       />
+
       <DeleteModal
         isOpen={isDeleteModalOpen}
         onClose={closeDeleteModal}
         onDelete={deleteHandler}
       />
-      <EditModal isOpen={isEditModalOpen} onClose={closeEditModal} />
+
+      <EditModal
+        product={selectedProduct}
+        isOpen={isEditModalOpen}
+        onClose={closeEditModal}
+        onSave={editHandler}
+      />
     </>
   );
 }

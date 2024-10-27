@@ -1,70 +1,68 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/AddModal.css";
 
-import { useForm } from "react-hook-form";
-import { addProductsMutation } from "../services/mutations";
+function EditModal({ isOpen, onClose, onSave, product }) {
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [quantity, setQuantity] = useState("");
 
-function EditModal({ isOpen, onClose, onCreat }) {
-  const {
-    register,
-      handleSubmit,
-    formState: { errors },
-  } = useForm();
+  useEffect(() => {
+    if (product) {
+      setName(product.name || "");
+      setPrice(product.price || "");
+      setQuantity(product.quantity || "");
+    }
+  }, [product]);
 
-  const addProducts = addProductsMutation();
-  const onSubmit = (data) => {
-    addProducts.mutate({
-      name: data.name,
-      price: data.price,
-      quantity: data.quantity,
+  if (!isOpen) return null;
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    onSave({
+      id: product.id,
+      name,
+      price,
+      quantity,
     });
-    onCreat(data);
-    onClose();
   };
 
-  if (!isOpen) return;
   return (
     <div className="modal">
-      <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <h2>ویرایش اطلاعات</h2>
-          <label htmlFor="">نام کالا</label>
-          <input
-            placeholder="نام کالا"
-            type="text"
-            {...register("name", { required: "نام محصول اجباریست" })}
-          />
-          {errors.name && <span>{errors.name.message}</span>}
-          <label htmlFor="">تعداد موجودی</label>
-          <input
-            type="number"
-            placeholder="تعداد"
-            {...register("quantity", {
-              required: "تعداد را وارد کنید",
-              min: { value: 0, message: "تعداد باید بیشتر از 0 باشد" },
-            })}
-          />
-          {errors.quantity && <span>{errors.quantity.message}</span>}
-          <label htmlFor="">قیمت</label>
-          <input
-            type="number"
-            placeholder="قیمت"
-            {...register("price", {
-              required: "قیمت را وارد کنید",
-              min: { value: 0, message: "قیمت باید بیشتر از 0 باشد" },
-            })}
-          />
-          {errors.price && <span>{errors.price.message}</span>}
-          <div className="btnHolder">
-            <button className="first" type="submit">
-              ثبت اطلاعات جدید
-            </button>
-            <button className="last" type="button" onClick={onClose}>
-              انصراف
-            </button>
-          </div>
-        </form>
-      </div>
+      <form onSubmit={handleSave}>
+        <h2>ویرایش محصول</h2>
+        <label htmlFor="">نام کالا</label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="نام کالا"
+        />
+
+        <label htmlFor="">قیمت</label>
+        <input
+          type="number"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          placeholder="قیمت"
+        />
+
+        <label htmlFor="">تعداد</label>
+        <input
+          type="number"
+          value={quantity}
+          onChange={(e) => setQuantity(e.target.value)}
+          placeholder="تعداد"
+        />
+
+        <div className="btnHolder">
+          <button className="first" type="submit">
+            ویرایش
+          </button>
+          <button className="last" type="button" onClick={onClose}>
+            انصراف
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

@@ -11,6 +11,7 @@
 .addContainer p {
   font-size: 24px;
   color: #282828;
+  padding: 5px;
 }
 .addContainer button {
   width: Fixed (132px) px;

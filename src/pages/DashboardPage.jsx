@@ -8,6 +8,7 @@ import { deleteCookie, getCookie } from "../utils/cookie";
 import ProductsTable from "../components/ProductsTable";
 import AddModal from "../components/AddModal";
 import { CiLogout } from "react-icons/ci";
+import { AiOutlineProduct } from "react-icons/ai";
 
 function DashboardPage() {
   const navigate = useNavigate();
@@ -35,7 +36,10 @@ function DashboardPage() {
       <SearchDashboard logOutHandler={logOutHandler} />
       <div className="addContainer">
         <div>
-          <p>مدیرت کالا</p>
+          <p>
+            <AiOutlineProduct style={{marginLeft:"10px"}}/>
+            مدیرت کالا
+          </p>
         </div>
         <div>
           <button onClick={openModel}>افزودن محصول</button>
