@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { deleteProductMutation, getProducts } from "../services/mutations";
 
@@ -7,21 +7,30 @@ import "../styles/ProductTable.css";
 import { RotatingLines } from "react-loader-spinner";
 import Table from "./Table";
 import DeleteModal from "./DeleteModal";
+import EditModal from "./EditModal";
 
 function ProductsTable() {
   const { data, error, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: getProducts,
   });
+  const queryClient = useQueryClient();
 
   const deleteProduct = deleteProductMutation();
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [selectedProductId, setSelectedProductId] = useState(null); 
+  const [selectedProductId, setSelectedProductId] = useState(null);
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const openDeleteModal = (productId) => {
-    setSelectedProductId(productId); 
+    setSelectedProductId(productId);
     setIsDeleteModalOpen(true);
+  };
+
+  const openEditModal = (productId) => {
+    setSelectedProductId(productId);
+    setIsEditModalOpen(true);
   };
 
   const closeDeleteModal = () => {
@@ -29,12 +38,20 @@ function ProductsTable() {
     setSelectedProductId(null);
   };
 
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
+    setSelectedProductId(null);
+  };
+
   const editHandler = (id) => {};
   const deleteHandler = () => {
     if (selectedProductId) {
-  
-      deleteProduct.mutate(selectedProductId);
-      closeDeleteModal();
+      deleteProduct.mutate(selectedProductId, {
+        onSuccess: () => {
+          queryClient.invalidateQueries("products");
+          closeDeleteModal();
+        },
+      });
     }
   };
 
@@ -52,7 +69,7 @@ function ProductsTable() {
     <>
       <Table
         products={products}
-        editHandler={editHandler}
+        openEditModal={openEditModal}
         openDeleteModal={openDeleteModal}
       />
       <DeleteModal
@@ -60,6 +77,7 @@ function ProductsTable() {
         onClose={closeDeleteModal}
         onDelete={deleteHandler}
       />
+      <EditModal isOpen={isEditModalOpen} onClose={closeEditModal} />
     </>
   );
 }

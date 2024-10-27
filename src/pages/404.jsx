@@ -1,19 +1,24 @@
 import React from "react";
 import myPhoto from "../images/404.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "../styles/404.css";
 
 import { FaArrowLeft } from "react-icons/fa";
+
 function PageNotFound() {
+  const navigate =useNavigate()
+  const backHandler = () => {
+   navigate("/login")
+  };
   return (
     <div className="container">
       <img src={myPhoto} alt="Not Found" />
-      <button className="button">
-        <div>
-          <Link to="login">Back to login</Link>
+      <button className="button" onClick={backHandler}>
+        back
+        <span>
           <FaArrowLeft />
-        </div>
+        </span>
       </button>
     </div>
   );

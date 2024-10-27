@@ -1,5 +1,19 @@
-.container {
-  padding: 20px;
+
+.logout-btn {
+  display: flex;
+  width: 1140px;
+  justify-content: flex-end;
+  align-items: center;
+}
+.logout-btn button {
+  line-height: 15px;
+  font-family: inherit;
+  padding: 5px;
+  font-size: 15px;
+  margin-bottom: 10px;
+  border: 1px solid #e4e4e4;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .inputHolder {
@@ -17,7 +31,6 @@
 .search {
   display: flex;
   align-items: center;
-  
 }
 .inputHolder input {
   border: 0;
@@ -29,7 +42,6 @@
   width: 50%;
   background-color: transparent;
   margin-top: 10px;
-
 }
 .userHolder {
   display: flex;
@@ -44,10 +56,10 @@
   border: 1px solid #e4e4e480;
   border-radius: 50%;
 }
-.userHolder div{
-    margin-left: 10px;
+.userHolder div {
+  margin-left: 10px;
 }
-p{
-    color: black;
-    font-size: 16px;
+p {
+  color: black;
+  font-size: 16px;
 }

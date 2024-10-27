@@ -2,11 +2,17 @@ import React from "react";
 import "../styles/Search.css";
 
 import myImg from "../images/user.png";
-import { CiSearch } from "react-icons/ci";
+import {  CiLogout, CiSearch } from "react-icons/ci";
 
-function SearchDashboard() {
+function SearchDashboard({ logOutHandler }) {
   return (
     <div className="container">
+      <div className="logout-btn">
+        <button onClick={logOutHandler}>
+          خروج
+          <CiLogout style={{marginRight:"10px"}}/>
+        </button>
+      </div>
       <div className="inputHolder">
         <div className="search">
           <CiSearch style={{ fontSize: "30px", height: "40px" }} />

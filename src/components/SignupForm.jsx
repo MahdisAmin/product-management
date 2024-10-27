@@ -9,46 +9,39 @@ import { useRegister } from "../services/mutations";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function SignupForm() {
-  console.log("rendering registerPage");
   const navigate = useNavigate();
-
   const { mutate } = useRegister();
-
   const {
     register,
     handleSubmit,
     trigger,
     formState: { errors },
   } = useForm();
-
   const [passwordError, setPasswordError] = useState("");
 
-  const submitHandler = (data) => {
-    const isValid = trigger();
+  const submitHandler = async (data) => {
+    const isValid = await trigger();
     if (!isValid) return;
 
     if (data.pass !== data.confirm) {
       setPasswordError("رمز عبور مطابقت ندارد");
       return;
     }
-    setPasswordError("");
-    console.log(data.user, data.pass);
-    mutate(
-      {
-        username: data.user,
-        password: data.pass,
-      },
-      {
-        onSuccess: (data) => {
-          console.log("succsee", data);
 
-          navigate("/login");
+    mutate(
+      { username: data.user, password: data.pass },
+      {
+        onSuccess: () => {
           toast.success("ثبت نام با موفقیت انجام شد", { autoClose: 3000 });
+          navigate("/login");
         },
         onError: (error) => {
-          console.log("error", error);
-
-          toast.error("مشکلی پیش آمد", { autoClose: 3000 });
+          if (error.response?.data?.message === "User already exists") {
+            toast.error("کاربر قبلاً ثبت نام کرده است", { autoClose: 3000 });
+            navigate("/login");
+          } else {
+            toast.error("مشکلی پیش آمد", { autoClose: 3000 });
+          }
         },
       }
     );

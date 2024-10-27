@@ -3,13 +3,11 @@ import "../styles/AddModal.css";
 
 import { useForm } from "react-hook-form";
 import { addProductsMutation } from "../services/mutations";
-import { useQueryClient } from "@tanstack/react-query";
 
-function AddModal({ isOpen, onClose, onCreat }) {
-  const queryClient= useQueryClient()
+function EditModal({ isOpen, onClose, onCreat }) {
   const {
     register,
-    handleSubmit,
+      handleSubmit,
     formState: { errors },
   } = useForm();
 
@@ -19,12 +17,8 @@ function AddModal({ isOpen, onClose, onCreat }) {
       name: data.name,
       price: data.price,
       quantity: data.quantity,
-    },{
-      onSuccess: () => {
-        queryClient.invalidateQueries("products");
-      }
-      }),
-       onCreat(data);
+    });
+    onCreat(data);
     onClose();
   };
 
@@ -33,7 +27,7 @@ function AddModal({ isOpen, onClose, onCreat }) {
     <div className="modal">
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h2>ایجاد محصول جدید</h2>
+          <h2>ویرایش اطلاعات</h2>
           <label htmlFor="">نام کالا</label>
           <input
             placeholder="نام کالا"
@@ -63,7 +57,7 @@ function AddModal({ isOpen, onClose, onCreat }) {
           {errors.price && <span>{errors.price.message}</span>}
           <div className="btnHolder">
             <button className="first" type="submit">
-              ایجاد
+              ثبت اطلاعات جدید
             </button>
             <button className="last" type="button" onClick={onClose}>
               انصراف
@@ -75,4 +69,4 @@ function AddModal({ isOpen, onClose, onCreat }) {
   );
 }
 
-export default AddModal;
+export default EditModal;

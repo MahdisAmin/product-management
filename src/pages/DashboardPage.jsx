@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { deleteCookie, getCookie } from "../utils/cookie";
 import ProductsTable from "../components/ProductsTable";
 import AddModal from "../components/AddModal";
+import { CiLogout } from "react-icons/ci";
 
 function DashboardPage() {
   const navigate = useNavigate();
@@ -31,8 +32,7 @@ function DashboardPage() {
 
   return (
     <>
-      <button onClick={logOutHandler}>log Out</button>
-      <SearchDashboard />
+      <SearchDashboard logOutHandler={logOutHandler} />
       <div className="addContainer">
         <div>
           <p>مدیرت کالا</p>

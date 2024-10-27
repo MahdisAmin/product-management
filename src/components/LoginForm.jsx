@@ -1,88 +1,73 @@
 import React from "react";
-
 import styles from "../styles/SignUpForm.module.css";
 import myImg from "../images/Union.png";
-
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useLogin } from "../services/mutations";
-import { getCookie, setCookie } from "../utils/cookie";
+import { setCookie } from "../utils/cookie";
+import { toast } from "react-toastify";
 
 function LoginForm() {
   const navigate = useNavigate();
   const { mutateAsync } = useLogin();
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmin = async (data) => {
-  
-   await mutateAsync(
+  const onSubmit = async (data) => {
+    await mutateAsync(
+      { username: data.user, password: data.pass },
       {
-        username: data.user,
-        password: data.pass,
-      },
-      {
-        onSuccess: (data) => {
-          console.log(data.data);
-          setCookie("token", data.data?.token);
-          
-          const token = getCookie("token");
-          if (token) {
-            navigate("/");
-            window.location.reload()
-            } else {
-              console.log(" no token");
-            }
-       
+        onSuccess: (response) => {
+          setCookie("token", response.data?.token);
+          toast.success("ورود با موفقیت انجام شد", { autoClose: 3000 });
+          navigate("/");
+          window.location.reload();
         },
-        onError: (error) => console.log(error.response.data.message),
+        onError: (error) => {
+          if (error.response?.data?.message === "Invalid credentials") {
+            toast.error(
+              " کاربری با این مشخصات یافت نشد یا رمز عبور اشتباه است",
+              { autoClose: 3000 }
+            );
+          } else {
+            toast.error("مشکلی پیش آمد", {
+              autoClose: 3000,
+            });
+          }
+        },
       }
     );
   };
 
   return (
-    <div>
-      <div className={styles.container}>
-        <h1>بوت کمپ بوتواستارت</h1>
-        <form
-          className={styles.form}
-          style={{ height: "533px" }}
-          onSubmit={handleSubmit(onSubmin)}
-        >
-          <div>
-            <img src={myImg} alt="" />
-            <h1>فرم ورود</h1>
-          </div>
+    <div className={styles.container}>
+      <h1>بوت کمپ بوتواستارت</h1>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <img src={myImg} alt="" />
+          <h1>فرم ورود</h1>
+        </div>
 
-          <label htmlFor="user"></label>
-          <input
-            type="text"
-            placeholder="نام کاربری"
-            id="user"
-            {...register("user", { required: true })}
-          />
-          {errors.user && <span>این فیلد اجباریست</span>}
+        <input
+          type="text"
+          placeholder="نام کاربری"
+          {...register("user", { required: "نام کاربری اجباریست" })}
+        />
+        {errors.user && <span>این فیلد اجباریست</span>}
 
-          <label htmlFor="pass"></label>
-          <input
-            type="text"
-            placeholder="رمز عبور"
-            id="pass"
-            {...register("pass", { required: true })}
-          />
+        <input
+          type="password"
+          placeholder="رمز عبور"
+          {...register("pass", { required: "رمز عبور اجباریست" })}
+        />
+        {errors.pass && <span>این فیلد اجباریست</span>}
 
-          {errors.pass && <span>این فیلد اجباریست</span>}
-
-          <button>ورود </button>
-          {/* <span> */}
-          <Link to="/register">ایجاد حساب کاربری!</Link>
-          {/* </span> */}
-        </form>
-      </div>
+        <button>ورود</button>
+        <Link to="/register">ایجاد حساب کاربری!</Link>
+      </form>
     </div>
   );
 }

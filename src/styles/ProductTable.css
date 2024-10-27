@@ -1,16 +1,15 @@
 .table-container {
   width: 1140px;
- min-height: 737px;
+  min-height: 737px;
   border-radius: 30px;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #e4e4e4;
   margin: auto;
-  background: #FFFFFF;
-
+  background: #ffffff;
 }
 
-.table-container table{
+.table-container table {
   border-collapse: collapse;
-   width: 1140px;
+  width: 1140px;
   margin: auto;
 }
 .table-container thead {
@@ -20,14 +19,14 @@
   color: #282828;
   text-align: right;
 }
-.rotat{
-display: flex;
-align-items: center;
-justify-content: center;
-height: 100%;
+.rotat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 737px;
 }
-th{
-    padding-right: 50px;
+th {
+  padding-right: 50px;
 }
 table th:first-child {
   border-top-right-radius: 30px;
@@ -36,15 +35,15 @@ table th:last-child {
   border-top-left-radius: 30px;
   /* width: 100px; */
 }
-td  {
-    height: 50px;
-    overflow: hidden;
-    padding: 30px 50px;
-    border-bottom: 1px solid #E4E4E4;
+td {
+  height: 50px;
+  overflow: hidden;
+  padding: 30px 50px;
+  border-bottom: 1px solid #e4e4e4;
 }
-button{
- background: transparent;
- border: none;
- font-size: 20px;
- padding-right: 20px;
+button {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  padding-right: 20px;
 }

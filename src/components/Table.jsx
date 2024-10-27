@@ -2,7 +2,7 @@ import React from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
-function Table({ products, editHandler, openDeleteModal }) {
+function Table({ products, openEditModal, openDeleteModal }) {
   return (
     <table>
       <thead>
@@ -20,11 +20,11 @@ function Table({ products, editHandler, openDeleteModal }) {
           <tr key={product.id}>
             <td>{product.name}</td>
             <td>{product.quantity}</td>
-            <td>{product.price}</td>
+            <td>{product.price} $</td>
             <td>{product.id.split("-")}</td>
             <td></td>
             <td>
-              <button onClick={() => editHandler(product.id)}>
+              <button onClick={() => openEditModal(product.id)}>
                 <FaRegEdit style={{ color: "green", cursor: "pointer" }} />
               </button>
               <button onClick={() => openDeleteModal(product.id)}>
