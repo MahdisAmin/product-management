@@ -24,7 +24,7 @@ function LoginForm() {
           setCookie("token", response.data?.token);
           toast.success("ورود با موفقیت انجام شد", { autoClose: 3000 });
           navigate("/");
-          window.location.reload();
+          // window.location.reload();
         },
         onError: (error) => {
           if (error.response?.data?.message === "Invalid credentials") {

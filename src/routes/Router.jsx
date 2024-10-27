@@ -6,6 +6,7 @@ import DashboardPage from "../pages/DashboardPage";
 
 import { getCookie } from "../utils/cookie";
 import PageNotFound from "../pages/404";
+import AuthProvider from "../providers/AuthProvider";
 
 function Router() {
   const token = getCookie("token");
@@ -16,7 +17,11 @@ function Router() {
       <Routes>
         <Route
           path="/"
-          element={token ? <DashboardPage /> : <Navigate to="login" />}
+          element={
+            <AuthProvider>
+              <DashboardPage />
+            </AuthProvider>
+          }
         />
         <Route path="register" element={<SignUpPage />} />
         <Route path="login" element={<LoginPage />} />
