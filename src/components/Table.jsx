@@ -2,7 +2,8 @@ import React from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
-function Table({ products, openEditModal, openDeleteModal }) {
+function Table({products, openEditModal, openDeleteModal }) {
+  
   return (
     <table>
       <thead>

@@ -10,6 +10,7 @@ function AddModal({ isOpen, onClose, onCreat }) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -24,7 +25,8 @@ function AddModal({ isOpen, onClose, onCreat }) {
         queryClient.invalidateQueries("products");
       }
       }),
-       onCreat(data);
+      onCreat(data);
+    reset()
     onClose();
   };
 

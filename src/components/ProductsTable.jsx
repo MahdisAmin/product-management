@@ -10,9 +10,10 @@ import { RotatingLines } from "react-loader-spinner";
 import Table from "./Table";
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
+import SearchDashboard from "./SearchDashboard";
 
-function ProductsTable() {
-  const { data, error, isLoading } = useQuery({
+function ProductsTable({ products }) {
+  const { isLoading, error } = useQuery({
     queryKey: ["products"],
     queryFn: getProducts,
   });
@@ -31,8 +32,8 @@ function ProductsTable() {
   };
 
   const openEditModal = (product) => {
-    setSelectedProduct(product); 
-    setIsEditModalOpen(true)
+    setSelectedProduct(product);
+    setIsEditModalOpen(true);
   };
 
   const closeDeleteModal = () => {
@@ -75,8 +76,6 @@ function ProductsTable() {
       </div>
     );
   if (error) return <div className="rotat">error {error.message}</div>;
-
-  const products = data?.data || [];
 
   return (
     <>
