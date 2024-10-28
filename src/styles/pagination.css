@@ -1,0 +1,16 @@
+.pagination{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.pagination button{
+    font-family: inherit;
+    font-size: 1.1rem;
+}
+.active{
+    color: #55a3f0;
+
+}

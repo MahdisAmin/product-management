@@ -11,12 +11,10 @@ import Table from "./Table";
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
 import SearchDashboard from "./SearchDashboard";
+import { useGetAllProducts } from "../services/querie";
 
 function ProductsTable({ products }) {
-  const { isLoading, error } = useQuery({
-    queryKey: ["products"],
-    queryFn: getProducts,
-  });
+  const { isLoading, error } =useGetAllProducts()
   const queryClient = useQueryClient();
 
   const deleteProduct = deleteProductMutation();

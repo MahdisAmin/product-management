@@ -5,22 +5,19 @@ import { useNavigate } from "react-router-dom";
 import { deleteCookie, getCookie } from "../utils/cookie";
 import ProductsTable from "../components/ProductsTable";
 import AddModal from "../components/AddModal";
-import { CiLogout } from "react-icons/ci";
 import { AiOutlineProduct } from "react-icons/ai";
-import { getProducts } from "../services/mutations";
-import { useQuery } from "@tanstack/react-query";
+import { useGetAllProducts } from "../services/querie";
+import Pagination from "../components/pagination";
 
 function DashboardPage() {
   const navigate = useNavigate();
-  const { data } = useQuery({
-    queryKey: ["products"],
-    queryFn: getProducts,
-  });
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data } = useGetAllProducts(currentPage);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const products = data?.data || [];
-
 
   const handleFilter = useCallback((filtered) => {
     setFilteredProducts(filtered);
@@ -44,15 +41,15 @@ function DashboardPage() {
     console.log(newProducts);
   };
 
-  useEffect(() => {
-    setFilteredProducts(products); // مقداردهی اولیه محصولات
-  }, [products]);
+  const totalPages = data?.data.totalPages;
+
+  console.log({ "total ": totalPages, current: currentPage, data: data });
 
   return (
     <>
       <SearchDashboard
         logOutHandler={logOutHandler}
-        products={products}
+        products={products.data}
         onFilter={handleFilter}
       />
 
@@ -76,6 +73,11 @@ function DashboardPage() {
         isOpen={isModalOpen}
         onClose={closeModale}
         onCreat={addProductsHandler}
+      />
+      <Pagination
+        currentPage={currentPage}
+        totalPage={totalPages}
+        onPageChange={setCurrentPage}
       />
     </>
   );
