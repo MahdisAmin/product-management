@@ -14,7 +14,7 @@ import SearchDashboard from "./SearchDashboard";
 import { useGetAllProducts } from "../services/querie";
 
 function ProductsTable({ products }) {
-  const { isLoading, error } =useGetAllProducts()
+  const { isLoading, error } = useGetAllProducts();
   const queryClient = useQueryClient();
 
   const deleteProduct = deleteProductMutation();
@@ -45,25 +45,14 @@ function ProductsTable({ products }) {
   };
 
   const editHandler = (updateProduct) => {
-    editProduct.mutate(updateProduct, {
-      onSuccess: () => {
-        queryClient.invalidateQueries("products");
-        closeEditModal();
-      },
-      onError: (error) => {
-        console.error("خطا در به‌روزرسانی محصول", error);
-      },
-    });
+    editProduct.mutate(updateProduct);
+    closeEditModal();
   };
 
   const deleteHandler = () => {
     if (selectedProduct) {
-      deleteProduct.mutate(selectedProduct, {
-        onSuccess: () => {
-          queryClient.invalidateQueries("products");
-          closeDeleteModal();
-        },
-      });
+      deleteProduct.mutate(selectedProduct);
+      closeDeleteModal()
     }
   };
 

@@ -15,8 +15,14 @@ const useLogin = () => {
 };
 
 const addProductsMutation = () => {
+  const queryClient = useQueryClient();
+
   const mutationFn = (newProduct) => api.post("/products", newProduct);
-  return useMutation({ mutationFn });
+  const onSuccess = async () => {
+    await queryClient.invalidateQueries({ queryKey: ["products"] });
+  };
+
+  return useMutation({ mutationFn, onSuccess });
 };
 
 const getProducts = async () => {
@@ -25,14 +31,26 @@ const getProducts = async () => {
 };
 
 const editProductMutation = () => {
+  const queryClient = useQueryClient();
+
   const mutationFn = (updateProduct) =>
     api.put(`products/${updateProduct.id}`, updateProduct);
-  return useMutation({ mutationFn });
+  const onSuccess = async () => {
+    await queryClient.invalidateQueries({ queryKey: ["products"] });
+  };
+
+  return useMutation({ mutationFn, onSuccess });
 };
 
 const deleteProductMutation = () => {
+  const queryClient = useQueryClient();
+
   const mutationFn = (productId) => api.delete(`/products/${productId}`);
-  return useMutation({ mutationFn });
+  const onSuccess = async () => {
+    await queryClient.invalidateQueries({ queryKey: ["products"] });
+  };
+
+  return useMutation({ mutationFn, onSuccess });
 };
 
 export {

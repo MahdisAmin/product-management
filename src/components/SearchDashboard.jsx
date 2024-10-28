@@ -9,7 +9,6 @@ function SearchDashboard({ logOutHandler, products, onFilter }) {
   const debouncedSearchName = useDebounce(searchName, 300);
 
   useEffect(() => {
-    // if (!products || products.data) return;
     const filtered = products?.filter((product) => {
       const nameMatch = product?.name
         .toLowerCase()

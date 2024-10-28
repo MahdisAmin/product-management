@@ -6,7 +6,6 @@ import { addProductsMutation } from "../services/mutations";
 import { useQueryClient } from "@tanstack/react-query";
 
 function AddModal({ isOpen, onClose, onCreat }) {
-  const queryClient= useQueryClient()
   const {
     register,
     handleSubmit,
@@ -20,11 +19,7 @@ function AddModal({ isOpen, onClose, onCreat }) {
       name: data.name,
       price: data.price,
       quantity: data.quantity,
-    },{
-      onSuccess: () => {
-        queryClient.invalidateQueries("products");
-      }
-      }),
+    })
       onCreat(data);
     reset()
     onClose();
