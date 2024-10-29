@@ -1,21 +1,18 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import {
   deleteProductMutation,
   editProductMutation,
-  getProducts,
 } from "../services/mutations";
 import "../styles/ProductTable.css";
 import { RotatingLines } from "react-loader-spinner";
 import Table from "./Table";
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
-import SearchDashboard from "./SearchDashboard";
+
 import { useGetAllProducts } from "../services/querie";
 
-function ProductsTable({ products }) {
-  const { isLoading, error } = useGetAllProducts();
-  const queryClient = useQueryClient();
+function ProductsTable({ products, setCurrentPage, currentPage }) {
+  const { isLoading, error, refetch,data} = useGetAllProducts();
 
   const deleteProduct = deleteProductMutation();
   const editProduct = editProductMutation();
@@ -52,7 +49,12 @@ function ProductsTable({ products }) {
   const deleteHandler = () => {
     if (selectedProduct) {
       deleteProduct.mutate(selectedProduct);
-      closeDeleteModal()
+
+      if (products.length === 1 && currentPage > 1) {
+        setCurrentPage(1);
+      }
+      refetch();
+      closeDeleteModal();
     }
   };
 

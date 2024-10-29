@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, {useState, useCallback } from "react";
 import "../styles/Dashboard.css";
 import SearchDashboard from "../components/SearchDashboard";
 import { useNavigate } from "react-router-dom";
@@ -9,19 +9,18 @@ import { AiOutlineProduct } from "react-icons/ai";
 import { useGetAllProducts } from "../services/querie";
 import Pagination from "../components/pagination";
 
+
 function DashboardPage() {
   const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const { data } = useGetAllProducts(currentPage);
+  const { data  } = useGetAllProducts(currentPage);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const products = data?.data || [];
 
-  const handleFilter = useCallback((filtered) => {
-    setFilteredProducts(filtered);
-  }, []);
+ 
 
   const openModel = () => {
     setIsModalOpen(true);
@@ -40,17 +39,18 @@ function DashboardPage() {
   const addProductsHandler = (newProducts) => {
     console.log(newProducts);
   };
+  
 
   const totalPages = data?.data.totalPages;
 
-  console.log({ "total ": totalPages, current: currentPage, data: data });
+
 
   return (
     <>
       <SearchDashboard
         logOutHandler={logOutHandler}
         products={products.data}
-        onFilter={handleFilter}
+        setFilteredProducts={setFilteredProducts}
       />
 
       <div className="addContainer">
@@ -67,7 +67,13 @@ function DashboardPage() {
         </div>
       </div>
       <div className="table-container">
-        <ProductsTable products={filteredProducts} />
+        
+          <ProductsTable
+            products={filteredProducts}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+          />
+        
       </div>
       <AddModal
         isOpen={isModalOpen}

@@ -4,10 +4,13 @@ import myImg from "../images/user.png";
 import { CiLogout, CiSearch } from "react-icons/ci";
 import useDebounce from "../hooks/useDebounce";
 
-function SearchDashboard({ logOutHandler, products, onFilter }) {
+function SearchDashboard({ logOutHandler, products, setFilteredProducts }) {
   const [searchName, setSearchName] = useState("");
   const debouncedSearchName = useDebounce(searchName, 300);
 
+  const handleFilter = (filtered) => {
+    setFilteredProducts(filtered);
+  };
   useEffect(() => {
     const filtered = products?.filter((product) => {
       const nameMatch = product?.name
@@ -16,8 +19,8 @@ function SearchDashboard({ logOutHandler, products, onFilter }) {
       return nameMatch;
     });
 
-    onFilter(filtered);
-  }, [debouncedSearchName, products, onFilter]);
+    handleFilter(filtered);
+  }, [debouncedSearchName, products]);
 
   return (
     <div className="container">
