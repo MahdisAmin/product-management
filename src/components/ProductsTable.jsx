@@ -12,7 +12,7 @@ import EditModal from "./EditModal";
 import { useGetAllProducts } from "../services/querie";
 
 function ProductsTable({ products, setCurrentPage, currentPage }) {
-  const { isLoading, error, refetch,data} = useGetAllProducts();
+  const { isLoading, error, refetch} = useGetAllProducts();
 
   const deleteProduct = deleteProductMutation();
   const editProduct = editProductMutation();

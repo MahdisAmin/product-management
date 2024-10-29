@@ -3,7 +3,7 @@ import "../styles/AddModal.css";
 
 import { useForm } from "react-hook-form";
 import { addProductsMutation } from "../services/mutations";
-import { useQueryClient } from "@tanstack/react-query";
+
 
 function AddModal({ isOpen, onClose, onCreat }) {
   const {
