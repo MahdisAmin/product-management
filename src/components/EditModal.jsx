@@ -5,6 +5,7 @@ function EditModal({ isOpen, onClose, onSave, product }) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
+  const [nameError, setNameError] = useState();
 
   useEffect(() => {
     if (product) {
@@ -18,6 +19,12 @@ function EditModal({ isOpen, onClose, onSave, product }) {
 
   const handleSave = (e) => {
     e.preventDefault();
+    if (!name.trim()) {
+      setNameError("نام کالا را وارد کنید");
+      return;
+    } else {
+      setNameError("");
+    }
     onSave({
       id: product.id,
       name,
@@ -38,15 +45,7 @@ function EditModal({ isOpen, onClose, onSave, product }) {
           onChange={(e) => setName(e.target.value)}
           placeholder="نام کالا"
         />
-
-        <label htmlFor="qeimat">قیمت</label>
-        <input
-          type="number"
-          id="qeimat"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          placeholder="قیمت"
-        />
+        {nameError && <span>{nameError}</span>}
 
         <label htmlFor="tedad">تعداد</label>
         <input
@@ -55,6 +54,14 @@ function EditModal({ isOpen, onClose, onSave, product }) {
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
           placeholder="تعداد"
+        />
+        <label htmlFor="qeimat">قیمت</label>
+        <input
+          type="number"
+          id="qeimat"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          placeholder="قیمت"
         />
 
         <div className="btnHolder">
