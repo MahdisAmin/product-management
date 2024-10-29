@@ -46,7 +46,7 @@ function SearchDashboard({ logOutHandler, products, setFilteredProducts }) {
           </div>
           <div>
             <p>نام کاربری</p>
-            <p>مدیر</p>
+            <span>مدیر</span>
           </div>
         </div>
       </div>

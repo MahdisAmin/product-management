@@ -41,7 +41,7 @@
 .inputHolder input {
   border: 0;
   height: 35px;
-  font-size: 20px;
+  font-size: 16px;
   font-family: inherit;
   margin-right: 5px;
   outline: none;
@@ -68,4 +68,8 @@
 p {
   color: black;
   font-size: 16px;
+}
+.userHolder span{
+  font-size: 12px;
+  color: #282828;
 }

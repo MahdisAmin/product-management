@@ -31,16 +31,18 @@ function AddModal({ isOpen, onClose, onCreat }) {
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <h2>ایجاد محصول جدید</h2>
-          <label htmlFor="">نام کالا</label>
+          <label htmlFor="kala">نام کالا</label>
           <input
             placeholder="نام کالا"
             type="text"
+          id="kala"
             {...register("name", { required: "نام محصول اجباریست" })}
           />
           {errors.name && <span>{errors.name.message}</span>}
-          <label htmlFor="">تعداد موجودی</label>
+          <label htmlFor="tedad">تعداد موجودی</label>
           <input
             type="number"
+            id="tedad"
             placeholder="تعداد"
             {...register("quantity", {
               required: "تعداد را وارد کنید",
@@ -48,8 +50,9 @@ function AddModal({ isOpen, onClose, onCreat }) {
             })}
           />
           {errors.quantity && <span>{errors.quantity.message}</span>}
-          <label htmlFor="">قیمت</label>
+          <label htmlFor="qeimat">قیمت</label>
           <input
+            id="qeimat"
             type="number"
             placeholder="قیمت"
             {...register("price", {

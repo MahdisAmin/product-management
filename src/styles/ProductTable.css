@@ -28,6 +28,9 @@
 }
 th {
   padding-right: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #282828;
 }
 table th:first-child {
   border-top-right-radius: 30px;
@@ -39,12 +42,13 @@ table th:last-child {
 td {
   height: 50px;
   overflow: hidden;
-  padding: 30px 50px;
+  padding: 30px 50px ;
+  font-size: 12px;
   border-bottom: 1px solid #e4e4e4;
 }
 button {
   background: transparent;
   border: none;
-  font-size: 20px;
+  font-size: 15px;
   padding-right: 20px;
 }

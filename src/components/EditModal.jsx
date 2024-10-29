@@ -30,25 +30,28 @@ function EditModal({ isOpen, onClose, onSave, product }) {
     <div className="modal">
       <form onSubmit={handleSave}>
         <h2>ویرایش محصول</h2>
-        <label htmlFor="">نام کالا</label>
+        <label htmlFor="kala">نام کالا</label>
         <input
           type="text"
           value={name}
+          id="kala"
           onChange={(e) => setName(e.target.value)}
           placeholder="نام کالا"
         />
 
-        <label htmlFor="">قیمت</label>
+        <label htmlFor="qeimat">قیمت</label>
         <input
           type="number"
+          id="qeimat"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
           placeholder="قیمت"
         />
 
-        <label htmlFor="">تعداد</label>
+        <label htmlFor="tedad">تعداد</label>
         <input
           type="number"
+          id="tedad"
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
           placeholder="تعداد"
